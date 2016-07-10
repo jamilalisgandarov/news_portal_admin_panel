@@ -4,4 +4,7 @@
 <div class="container">
 <h2>Welcome</h2>
 </div>
+  <ul>
+{{Session::get('message')}}
+  </ul>
 @endsection

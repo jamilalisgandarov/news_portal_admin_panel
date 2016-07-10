@@ -56,7 +56,7 @@
 
                 <p>
                   @yield('personInfo')
-                  <small>Member since Nov. 2012</small>
+                
                 </p>
               </li>
               <!-- Menu Body -->
@@ -93,11 +93,13 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu">
         <li class="header">MAIN NAVIGATION</li>
+        @if(\Auth::user()->status==0)
         <li class="treeview">
           <a href="/requests">
-            <i class="fa fa-folder"></i> <span>Author Requests</span>
+            <i class="fa fa-folder"></i> <span>Author Requests</span><span class="pull-right label-warning label">{{count(App\Author::all())}}</span>
           </a>
         </li>
+        @endif
         
 
       </ul>
@@ -114,8 +116,8 @@
         <small>Control panel</small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Dashboard</li>
+        <li><a href="/home"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">{{Request::path()}}</li>
       </ol>
     </section>
 

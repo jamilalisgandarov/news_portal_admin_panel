@@ -29,14 +29,25 @@ class MainController extends Controller
         $author->save();
        return redirect('/home');
 }
-    		function showRequests(Author $author){
+            
+    		function showRequests(Author $author){ 
+            if(\Auth::check()){
+                if(\Auth::user()->status==0){
     			$authors=$author->get();
                  $id=\Auth::user()->id;
                  $user=User::find($id);
     			return view('adminPanel.requests')
                 ->with(compact('authors'))
                 ->with(compact('user'));
-    		}
+                }
+                 else{
+                return back()->with('message','Operation Successful !');
+        }
+    		}      
+        else{
+          abort(404);
+        }
+    }
 
 
             function delete(Author $author){
@@ -45,14 +56,18 @@ class MainController extends Controller
             }
             function insert(Author $author,User $user){
                 $user=new User;
+                $users=User::all();
                 $user->first_name=$author->first_name;
                 $user->last_name=$author->last_name;
                 $user->email=$author->email;
+               
                 $user->password=\Hash::make($author->password);
                 $user->status=1;
                 $user->save();
                 $author->delete();
                 return back();
+            
+             
 
             }
             function getData(){
