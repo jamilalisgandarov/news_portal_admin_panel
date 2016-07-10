@@ -16,7 +16,11 @@
 
 Route::group(['middleware'=>['web','auth']],function (){
 Route::get('/requests', 'MainController@showRequests');
+Route::get('/editorsInfo', function (){
+	return view('adminPanel.editorsInfo');
+});
 Route::get('/delete/{author}', 'MainController@delete');
+Route::get('/user/delete/{user}', 'MainController@userDelete');
 Route::get('/adminLogin', function () {
     return view('adminPanel.login');
 });

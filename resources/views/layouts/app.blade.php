@@ -55,6 +55,7 @@
                    {{\Auth::user()->first_name}} {{\Auth::user()->last_name}}
                 @else
                 @endif
+                &nbsp;<i style="color:#00FF00" class="fa fa-circle-o" aria-hidden="true"></i>
               </span>
             </a>
             <ul class="dropdown-menu">
@@ -107,7 +108,13 @@
           </a>
         </li>
        @endif
-        
+                 @if(\Auth::user()->status==0)
+        <li class="treeview">
+          <a href="/editorsInfo">
+      <i class="fa fa-user" aria-hidden="true"></i> <span>Authors</span>
+          </a>
+        </li>
+       @endif
 
       </ul>
     </section>

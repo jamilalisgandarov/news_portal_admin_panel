@@ -50,6 +50,10 @@ class MainController extends Controller
                 $author->delete();
                 return back();
             }
+            function userDelete(User $user){
+                  $user->delete();
+                return back();
+            }
             function insert(Author $author,User $user){
                 $user=new User;
                 $users=User::all();
