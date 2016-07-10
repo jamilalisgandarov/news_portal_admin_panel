@@ -15,7 +15,6 @@
 
 
 Route::group(['middleware'=>['web','auth']],function (){
-Route::get('/', 'MainController@getData');
 Route::get('/requests', 'MainController@showRequests');
 Route::get('/delete/{author}', 'MainController@delete');
 Route::get('/adminLogin', function () {

@@ -34,8 +34,6 @@ class MainController extends Controller
             if(\Auth::check()){
                 if(\Auth::user()->status==0){
     			$authors=$author->get();
-                 $id=\Auth::user()->id;
-                 $user=User::find($id);
     			return view('adminPanel.requests')
                 ->with(compact('authors'))
                 ->with(compact('user'));
@@ -48,8 +46,6 @@ class MainController extends Controller
           abort(404);
         }
     }
-
-
             function delete(Author $author){
                 $author->delete();
                 return back();
@@ -59,20 +55,11 @@ class MainController extends Controller
                 $users=User::all();
                 $user->first_name=$author->first_name;
                 $user->last_name=$author->last_name;
-                $user->email=$author->email;
-               
+                $user->email=$author->email;               
                 $user->password=\Hash::make($author->password);
                 $user->status=1;
                 $user->save();
                 $author->delete();
                 return back();
-            
-             
-
-            }
-            function getData(){
-                 $id=\Auth::user()->id;
-                 $user=User::find($id);
-                 return view('home',compact('user'));
             }
 }

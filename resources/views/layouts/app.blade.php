@@ -39,13 +39,20 @@
 
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
-        
+        @if(\Auth::user()->status==0)
+         <li class=" notifications-menu">
+            <a href="/requests" >
+              <i class="fa fa-user-plus" aria-hidden="true"></i>
+              <span class="label label-warning">{{count(App\Author::all())}}</span>
+            </a>
+          </li>
+          @endif
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <span class="hidden-xs">   
               @if(!Auth::guest())
-                   {{$user->first_name}} {{$user->last_name}}
+                   {{\Auth::user()->first_name}} {{\Auth::user()->last_name}}
                 @else
                 @endif
               </span>
@@ -93,13 +100,13 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu">
         <li class="header">MAIN NAVIGATION</li>
-        @if(\Auth::user()->status==0)
+         @if(\Auth::user()->status==0)
         <li class="treeview">
           <a href="/requests">
-            <i class="fa fa-folder"></i> <span>Author Requests</span><span class="pull-right label-warning label">{{count(App\Author::all())}}</span>
+            <i class="fa fa-user-plus" aria-hidden="true"></i> <span>Author Requests</span>
           </a>
         </li>
-        @endif
+       @endif
         
 
       </ul>
