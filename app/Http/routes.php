@@ -15,17 +15,54 @@
 
 
 Route::group(['middleware'=>['web','auth']],function (){
-Route::get('/requests', 'MainController@showRequests');
-Route::get('/editorsInfo', function (){
+
+	//news
+	Route::get('/','NewsController@showNews');
+	Route::get('/news/add','NewsController@addNews');
+	Route::post('/news/insert','NewsController@insert');
+	Route::get('/news/{news}/edit','NewsController@edit');
+	Route::patch('/news/{news}/update','NewsController@update');
+	Route::get('/news/{news}/delete','NewsController@delete');
+	
+	//========================== Category =============================
+
+	Route::get('/category','CategoriesController@showall');
+	Route::get('/category/{catId}','CategoriesController@show');
+	Route::get('/add/category','CategoriesController@create');
+	Route::post('/add/store','CategoriesController@store');
+	Route::get('/edit/{catId}/category','CategoriesController@edit');
+	Route::patch('/update/{catId}/category','CategoriesController@update');
+	Route::get('/delete/{catId}/category','CategoriesController@destroy');
+
+	Route::get('/select','CategoriesController@select');
+
+	//========================== SubCategory =============================
+
+	Route::get('/add/{catId}/subcategory','SubCategoriesController@create');
+	Route::post('/store/{catId}/subcategory','SubCategoriesController@store');
+	Route::get('/edit/{catId}/subcategory','SubCategoriesController@edit');
+	Route::patch('/update/{catId}/subcategory','SubCategoriesController@update');
+	Route::get('/delete/{catId}/subcategory','SubCategoriesController@destroy');
+
+	Route::get('/requests', 'MainController@showRequests');
+	Route::get('/delete/{author}', 'MainController@delete');
+
+	Route::get('/editorsInfo', function (){
 	return view('adminPanel.editorsInfo');
-});
-Route::get('/delete/{author}', 'MainController@delete');
-Route::get('/user/delete/{user}', 'MainController@userDelete');
-Route::get('/adminLogin', function () {
+	});
+
+	Route::get('/adminLogin', function () {
     return view('adminPanel.login');
 });
 Route::get('/home/{user}', 'HomeController@index');
 Route::get('/insert/{author}','MainController@insert');
+
+Route::get('/editorsInfo', function (){
+	return view('adminPanel.editorsInfo');
+});
+Route::get('/user/delete/{user}', 'MainController@userDelete');
+
+
 });
 Route::get('/authorRegistration', function () {
     return view('registrationForm.register');});
