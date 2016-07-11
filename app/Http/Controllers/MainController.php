@@ -29,26 +29,16 @@ class MainController extends Controller
         $author->email=$request->email;
         $author->password=$request->password;
         $author->save();
-       return redirect('/home');
+       return redirect('/login');
     }
 
 
     // Show all author request in admin panel       
     function showRequests(Author $author){ 
-        if(\Auth::check()){
-            if(\Auth::user()->status==0){
     		  $authors=$author->get();
     		  return view('adminPanel.requests')
               ->with(compact('authors'))
-              ->with(compact('user'));
-            }
-            else{
-               return back()->with('message','Operation Successful !');
-            }
-    	}      
-        else{
-            abort(404);
-        }
+              ->with(compact('user'));         
     }
 
     // Accepting author request
@@ -64,19 +54,14 @@ class MainController extends Controller
         $author->delete();
         return back();
     }
-
     // Decline author request
     function delete(Author $author){
         $author->delete();
         return back();
     }
-
     // Deleting accepted author
     function userDelete(User $user){
         $user->delete();
         return back();
     }
-
-
-
 }

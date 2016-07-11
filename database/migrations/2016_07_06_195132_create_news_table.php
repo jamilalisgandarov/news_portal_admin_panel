@@ -16,7 +16,7 @@ class CreateNewsTable extends Migration
             $table->increments('id');
             $table->integer('category_id')->unsigned()->index();
             $table->integer('subcategory_id')->unsigned()->index();
-            $table->integer('author_id')->unsigned()->index();
+            $table->integer('user_id')->unsigned()->index();
             $table->string('title_az');
             $table->string('title_en');
             $table->string('title_ru');

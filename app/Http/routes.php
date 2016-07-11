@@ -26,43 +26,36 @@ Route::group(['middleware'=>['web','auth']],function (){
 	
 	//========================== Category =============================
 
-	Route::get('/category','CategoriesController@showall');
-	Route::get('/category/{catId}','CategoriesController@show');
-	Route::get('/add/category','CategoriesController@create');
-	Route::post('/add/store','CategoriesController@store');
-	Route::get('/edit/{catId}/category','CategoriesController@edit');
-	Route::patch('/update/{catId}/category','CategoriesController@update');
-	Route::get('/delete/{catId}/category','CategoriesController@destroy');
-
-	Route::get('/select','CategoriesController@select');
-
+	Route::group(['middleware'=>['status']],function (){
+		Route::get('/category/{catId}','CategoriesController@show');
+		Route::get('/add/category','CategoriesController@create');
+		Route::post('/add/store','CategoriesController@store');
+		Route::get('/edit/{catId}/category','CategoriesController@edit');
+		Route::patch('/update/{catId}/category','CategoriesController@update');
+		Route::get('/delete/{catId}/category','CategoriesController@destroy');
+		Route::get('/category','CategoriesController@showall');
+		Route::get('/select','CategoriesController@select');
+	
 	//========================== SubCategory =============================
 
-	Route::get('/add/{catId}/subcategory','SubCategoriesController@create');
-	Route::post('/store/{catId}/subcategory','SubCategoriesController@store');
-	Route::get('/edit/{catId}/subcategory','SubCategoriesController@edit');
-	Route::patch('/update/{catId}/subcategory','SubCategoriesController@update');
-	Route::get('/delete/{catId}/subcategory','SubCategoriesController@destroy');
+		Route::get('/add/{catId}/subcategory','SubCategoriesController@create');
+		Route::post('/store/{catId}/subcategory','SubCategoriesController@store');
+		Route::get('/edit/{catId}/subcategory','SubCategoriesController@edit');
+		Route::patch('/update/{catId}/subcategory','SubCategoriesController@update');
+		Route::get('/delete/{catId}/subcategory','SubCategoriesController@destroy');
 
-	Route::get('/requests', 'MainController@showRequests');
-	Route::get('/delete/{author}', 'MainController@delete');
+		Route::get('/requests', 'MainController@showRequests');
+		Route::get('/delete/{author}', 'MainController@delete');
 
-	Route::get('/editorsInfo', function (){
-	return view('adminPanel.editorsInfo');
+		Route::get('/editorsInfo', function (){
+		return view('adminPanel.editorsInfo');
+		});
+		Route::get('/insert/{author}','MainController@insert');
+		Route::get('/user/delete/{user}', 'MainController@userDelete');
+		Route::get('/editorsInfo', function (){
+		return view('adminPanel.editorsInfo');
+		});
 	});
-
-	Route::get('/adminLogin', function () {
-    return view('adminPanel.login');
-});
-Route::get('/home/{user}', 'HomeController@index');
-Route::get('/insert/{author}','MainController@insert');
-
-Route::get('/editorsInfo', function (){
-	return view('adminPanel.editorsInfo');
-});
-Route::get('/user/delete/{user}', 'MainController@userDelete');
-
-
 });
 Route::get('/authorRegistration', function () {
     return view('registrationForm.register');});

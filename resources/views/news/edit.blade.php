@@ -12,7 +12,7 @@
 			<hr>
     	</div>
 		<div class="">
-			<form method="post" action="/news/{{$news->id}}/update">
+			<form method="post"  enctype="multipart/form-data" action="/news/{{$news->id}}/update">
 				{{ method_field('patch') }}
 				<input type="hidden" name="_token" value="{{ csrf_token() }}">
 				<div class="row">
@@ -69,7 +69,7 @@
 
 							@foreach($categories as $category)
 								<optgroup label="{{$category->title_en}}">
-									@foreach($category->subcategory->all() as $subcategory)
+									@foreach($category->subcategories->all() as $subcategory)
 							    		<option <?php if($news->subcategory_id==$subcategory->id){echo 'selected';} ?>>{{$subcategory->title_en}}</option>
 							    	@endforeach
 								</optgroup>

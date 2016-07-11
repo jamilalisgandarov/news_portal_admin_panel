@@ -5,7 +5,7 @@
 	<div class="container">
 
 		<div class="">
-			<form method="POST" action="/news/insert" accept-charset="UTF-8">
+			<form method="POST" action="/news/insert" enctype="multipart/form-data" accept-charset="UTF-8">
 				<input type="hidden" name="_token" value="{{ csrf_token() }}">
 				<div class="row lang">
 				  	<div class="form-group col-md-4">
