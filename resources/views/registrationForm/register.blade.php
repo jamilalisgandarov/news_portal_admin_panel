@@ -34,14 +34,17 @@
 				</div>
 
 				<input type="submit" class="btn btn-primary" id='submit' value="Apply for registration">
+				<a href="/login" class="btn  btn-default">                                
+                    <i class="fa fa-user" aria-hidden="true"></i> Back to login page
+                </a>
 			</form>
 			<p style='color:red' id='notification'>
+				<ul>
+
+		</ul>	
 		</div>
-		<ul>
-		@foreach($errors as $error)
-		<li>{{$error}}</li>
-		@endforeach
-		</ul>
+
+
 	</div>
 	<script type="text/javascript" src='
 js/jquery-3.0.0.min.js'></script>

@@ -14,7 +14,7 @@
 
 
 
-Route::group(['middleware'=>['web','auth']],function (){
+Route::group(['middleware'=>['auth']],function (){
 
 	//news
 	Route::get('/','NewsController@showNews');
@@ -57,6 +57,7 @@ Route::group(['middleware'=>['web','auth']],function (){
 		});
 	});
 });
+
 Route::get('/authorRegistration', function () {
     return view('registrationForm.register');});
 Route::post('/authorRegistration/submitted', 'MainController@register');

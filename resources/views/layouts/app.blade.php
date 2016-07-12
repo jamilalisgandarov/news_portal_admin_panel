@@ -41,11 +41,14 @@
 
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
-        @if(\Auth::user()->status==0)
+        @if(\Auth::user()->status==0 )
+
          <li class=" notifications-menu">
             <a href="/requests" >
               <i class="fa fa-user-plus" aria-hidden="true"></i>
+              @if(count(App\Author::all())!=0)
               <span class="label label-warning">{{count(App\Author::all())}}</span>
+              @endif
             </a>
           </li>
           @endif
@@ -57,27 +60,13 @@
                    {{\Auth::user()->first_name}} {{\Auth::user()->last_name}}
                 @else
                 @endif
-                &nbsp;<i style="color:#00FF00" class="fa fa-circle-o" aria-hidden="true"></i>
+                &nbsp;<i class="fa fa-chevron-down" aria-hidden="true"></i>
               </span>
             </a>
-            <ul class="dropdown-menu">
-              <!-- User image -->
-              <li class="user-header">
-
-                <p>
-                  @yield('personInfo')
-                
-                </p>
-              </li>
+            <ul class="dropdown-menu" style="width:0 !important">
               <!-- Menu Body -->
-              <li class="user-footer">
-                <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">Profile</a>
-                </div>
-                <div class="pull-right">
-                  <a href="{{ url('/logout') }}" class="btn btn-default btn-flat">Sign out</a>
-                </div>
-              </li>
+              <li >
+                  <a href="#" data-toggle="modal" data-target="#gridSystemModal" class=" dropdown-item btn-default ">Sign out</a> </li>
             </ul>
           </li>
         </ul>
@@ -106,6 +95,7 @@
         <li class="treeview">
               <a href="/">
                 <i class="fa fa-newspaper-o" aria-hidden="true"></i></i> <span>News</span>
+                       <span class="label label-default pull-right">{{count(App\News::all())}}</span>
               </a>
           <ul class="treeview-menu">
             <li class="treeview">
@@ -116,6 +106,7 @@
             <li class="treeview">
               <a href="/news/add">
                 <i class="fa fa-plus" aria-hidden="true"></i> <span>Add News</span>
+
               </a>
             </li>           
           </ul>
@@ -185,47 +176,36 @@
   <!-- /.control-sidebar -->
   <!-- Add the sidebar's background. This div must be placed
        immediately after the control sidebar -->
-  <div class="control-sidebar-bg"></div>
+
 </div>
 <!-- ./wrapper -->
 
 <!-- jQuery 2.2.3 -->
+<!-- jQuery 2.2.3 -->
 <script src="/plugins/jQuery/jquery-2.2.3.min.js"></script>
-<!-- jQuery UI 1.11.4 -->
-<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
-<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-<script>
-  $.widget.bridge('uibutton', $.ui.button);
-</script>
 <!-- Bootstrap 3.3.6 -->
 <script src="/bootstrap/js/bootstrap.min.js"></script>
-<!-- Morris.js charts -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-<script src="/plugins/morris/morris.min.js"></script>
-<!-- Sparkline -->
-<script src="/plugins/sparkline/jquery.sparkline.min.js"></script>
-<!-- jvectormap -->
-<script src="/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
-<script src="/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
-<!-- jQuery Knob Chart -->
-<script src="/plugins/knob/jquery.knob.js"></script>
-<!-- daterangepicker -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
-<script src="/plugins/daterangepicker/daterangepicker.js"></script>
-<!-- datepicker -->
-<script src="/plugins/datepicker/bootstrap-datepicker.js"></script>
-<!-- Bootstrap WYSIHTML5 -->
-<script src="/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
-<!-- Slimscroll -->
-<script src="/plugins/slimScroll/jquery.slimscroll.min.js"></script>
-<!-- FastClick -->
-<script src="/plugins/fastclick/fastclick.js"></script>
 <!-- AdminLTE App -->
 <script src="/dist/js/app.min.js"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="/dist/js/pages/dashboard.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="/dist/js/demo.js"></script>
 
+ <div class="modal fade" tabindex="-1" role="dialog" id="gridSystemModal" aria-labelledby="gridSystemModalLabel">
+             <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="gridSystemModalLabel">Warning</h4>
+            </div>
+            <div class="modal-body">
+            <span>     Do you want to <b> sign out </b> ? </span>
+            </div>
+            <div class="modal-footer">
+            <a  href='/logout'>
+                <button type="button" class="btn btn-danger">Sign Out</button>
+            </a>
+            <button type="button" class="btn btn-primary"  data-dismiss="modal">Back</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 </body>
 </html>
